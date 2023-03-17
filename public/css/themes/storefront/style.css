@@ -34,8 +34,57 @@ Images License: GNU General Public License v2 or later
  -ms-text-size-adjust:100%;
  -webkit-text-size-adjust:100%
 }
+div#logo {
+ margin-right: 3em;
+ padding-top: 0.4em;
+ height: fit-content;
+}
 body {
- margin:0
+ margin:0;
+
+}
+header{
+ display:flex;
+}
+header nav {
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ width:100%;
+ padding:0 20px;
+ background-color:#fff;
+ box-shadow:0 0 10px rgba(0,0,0,.1);
+ z-index:100;
+
+ top:0;
+ left:0;
+ right:0;
+ height:60px;
+}
+#compte-icon{
+ width: 30px;
+ height: 30px;
+}
+
+#account-li span{
+ margin: auto 0;
+}
+#account-li{
+
+ flex-direction: row;
+ display: flex;
+ align-items: center;
+ column-gap: 10px;
+ /* justify-content: space-between; */
+ width: fit-content;
+ margin-right: 1em;
+ margin-left: 2em;
+ height: 4em
+
+}
+.search {
+ width: fit-content;
+ margin: 0 auto;
 }
 article,
 aside,
@@ -43,14 +92,13 @@ details,
 figcaption,
 figure,
 footer,
-header,
+
 hgroup,
 main,
-menu,
-nav,
+
 section,
 summary {
- display:block
+ display:block;
 }
 audio,
 canvas,
@@ -85,7 +133,20 @@ dfn {
  font-style:italic
 }
 h1 {
- font-size:2em;
+ background: linear-gradient(to right, #f12711, #f5af19);
+ -webkit-background-clip: text;
+ -webkit-text-fill-color: transparent;
+ font-size: 2.5em;
+ font-weight: 700;
+ margin: 0;
+ padding: 0;
+ text-align: center;
+ text-transform: uppercase;
+ letter-spacing: 0.1em;
+ line-height: 1.2;
+ margin-bottom: 1em;
+ font-size:1em;
+ font-family: "Roboto", sans-serif;
  margin:.67em 0
 }
 mark {
@@ -1307,6 +1368,9 @@ button.menu-toggle:after {
 .handheld-navigation,
 .main-navigation div.menu>ul:not(.nav-menu),
 .nav-menu {
+ margin:0;
+ height: auto;
+
  overflow:hidden;
  max-height:0;
  -webkit-transition:all,ease,.8s;
@@ -1717,6 +1781,7 @@ button.menu-toggle:after {
  .site-content:after,
  .site-content:before {
   content:"";
+  margin-top: 2em;
   display:table
  }
  .site-content:after {
@@ -2045,7 +2110,7 @@ button.menu-toggle:after {
   clear:both
  }
  .main-navigation div.menu {
-  display:block
+  display:flex;
  }
  .main-navigation ul.menu,
  .main-navigation ul.nav-menu {
