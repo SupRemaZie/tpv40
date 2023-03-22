@@ -77,7 +77,7 @@ class PanierController extends AbstractController
     {
 		$session = $request->getSession() ;
 		if (!$session->isStarted())
-			$session->start() ;	
+			$session->start();
 		if ($session->has("panier"))
 			$this->panier = $session->get("panier") ;
 		else

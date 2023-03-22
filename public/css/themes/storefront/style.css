@@ -34,6 +34,9 @@ Images License: GNU General Public License v2 or later
  -ms-text-size-adjust:100%;
  -webkit-text-size-adjust:100%
 }
+img#logoMusa {
+ width: 10em;
+}
 div#logo {
  margin-right: 3em;
  padding-top: 0.4em;
@@ -41,6 +44,7 @@ div#logo {
 }
 body {
  margin:0;
+ background: #0c2840;
 
 }
 header{
@@ -280,7 +284,7 @@ h6 {
  clear:both;
  font-weight:300;
  margin:0 0 .5407911001em;
- color:#131315
+ color:#FFF;
 }
 h1 a,
 h2 a,
@@ -467,9 +471,7 @@ textarea:focus {
 * {
  box-sizing:border-box
 }
-body {
- background-color:#fff
-}
+
 .site,
 body {
  overflow-x:hidden
@@ -971,7 +973,11 @@ table tbody h2 a {
  margin:0 0 1em
 }
 form {
- margin-bottom:1.618em
+ margin-bottom:1.618em;
+ color : white;
+}
+.cart-collaterals {
+ color: white;
 }
 button,
 input,
@@ -2222,4 +2228,5 @@ button.menu-toggle:after {
   margin-right:1.41575em;
   padding:0
  }
+
 }

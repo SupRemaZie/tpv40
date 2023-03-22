@@ -157,6 +157,36 @@ class Search
     }
 
     /**
+     * get an artist by id
+     * @param int $idArtist
+     */
+    public function getArtist($idArtist = null){
+        if ($idArtist == null) {
+            throw new DeezerException('Id of artist is null');
+        }
+        $url = self::DEEZER_API_URL . '/artist/' . $idArtist;
+        $this->results = array() ;
+        $this->parse($url);
+        return $this->getAllData();
+    }
+    /**
+     * get all the artist
+     *
+     */
+    public function getAllTheArtist()  {
+        $artists = array();
+        for ($i = 0; $i < 1000; $i++){
+            getArtist($i);
+            if (isset($this->results['name'])){
+                $artists[] = $this->results;
+            }
+        }
+        return $artists;
+     }
+
+
+
+    /**
      * Search an artist
      */
     public function searchArtist()
@@ -173,6 +203,9 @@ class Search
         $this->type = 'album';
         return $this->search();
     }
+
+
+
 	
     /**
      * Search albums by artist

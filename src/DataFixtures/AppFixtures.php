@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use DeezerAPI\Search;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -16,11 +17,24 @@ use DeezerAPI\Search as DeezerSearch;
 use App\Entity\Catalogue\Livre;
 use App\Entity\Catalogue\Musique;
 use App\Entity\Catalogue\Piste;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Formatter\JsonFormatter;
 
 class AppFixtures extends Fixture
 {
+
     public function load(ObjectManager $manager): void
     {
+        /*$log = new Logger('channel_name');
+        $formatter = new JsonFormatter();
+        $stream = new StreamHandler(__DIR__.'/application-json.log', Logger::DEBUG);
+        //clear json file
+        file_put_contents(__DIR__.'/application-json.log', '');
+        $stream->setFormatter($formatter);
+
+        $log->pushHandler($stream);*/
+
         if (count($manager->getRepository("App\Entity\Catalogue\Article")->findAll()) == 0) {
             $conf = new GenericConfiguration();
             $client = new Client();
@@ -42,11 +56,21 @@ class AppFixtures extends Fixture
 
             $search = new AmazonSearch();
             $search->setCategory('Music');
-            $keywords = ['Ibrahim Maalouf','linkin park'] ;
+            //request all the artists an put in a array
+            $pathJSON = './src/Entity/Catalogue/artists.json';
+            $json = file_get_contents($pathJSON);
+            $data = json_decode($json, true);
+            $keywords = array();
+            foreach ($data['artists'] as $artist) {
+                $keywords[] = $artist['name'];
+            }
+
 
             //$search->setCategory('Books');
             //$keywords = 'Henning Mankell' ;
             foreach ($keywords as $keyword) {
+                unset($albums);
+
                 $search->setKeywords($keyword);
 
                 $search->setResponseGroup(array('Offers', 'ItemAttributes', 'Images'));
@@ -80,11 +104,12 @@ class AppFixtures extends Fixture
                                         $entityMusique->setPrix($child_2->OfferSummary->LowestNewPrice->Amount / 100.0);
                                         $entityMusique->setDisponibilite(1);
                                         $entityMusique->setImage($child_2->LargeImage->URL);
-                                        if (!isset($albums)) {
+                                        if(!isset($albums)){
                                             $deezerSearch = new DeezerSearch($keyword);
                                             $artistes = $deezerSearch->searchArtist();
                                             $albums = $deezerSearch->searchAlbumsByArtist($artistes[0]->getId());
                                         }
+
                                         $j = 0;
                                         $sortir = ($j == count($albums));
                                         $albumTrouve = false;
